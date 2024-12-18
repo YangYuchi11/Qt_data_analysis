@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package comm_data;
+
+import "chassis.proto";
+import "header.proto";
+import "motor_error_info.proto";
+
+message ChassisStatus {
+    /// 底盘状态信息（错误信息）
+    /// 方向盘电流
+    double motor_electric_current = 1;
+
+    /// 方向盘是否被人工接管
+    bool is_motor_overtake = 2;
+
+    /// 方向盘错误信息
+    MotorErrorInfo motor_error_info = 3;
+
+    /// more
+
+}
+
+/// 农机具总线反馈信息
+message ChassisInfo {
+    Header header = 1;
+
+    Chassis chassis = 2;
+
+    ChassisStatus status = 3;
+}

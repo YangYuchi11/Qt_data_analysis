@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package comm_data;
+
+enum Gear {
+    D = 0;
+    R = 1;
+    P = 2;
+    N = 3;
+}
+
+/// 底盘信息。用作控制和反馈。
+message Chassis {
+    /// （目标）挡位
+    Gear gear = 1;
+
+    /// （目标）油门开度
+    double throttle_rate = 2;
+
+    /// （目标）刹车比例
+    double break_rate = 3;
+
+    /// （目标）线速度
+    double speed = 4;
+
+    /// （目标）线加速度
+    double acceleration = 5;
+
+    /// （目标）转向轮中心相对转向角
+    double angle = 6;
+
+    /// （目标）方向盘转角
+    double steering_theta = 7;
+
+    /// （目标）方向盘角度变化
+    double steering_dtheta = 8;
+
+    /// （目标）当控制车辆时表示方向盘转速；当使用外置电机时表示电机转速
+    double steering_rotaion_speed = 9;
+
+    /// （目标）挡位数值。如40个前进挡，20个倒挡，与gear共同使用
+    int64 gear_num = 10;
+
+    /// 当前方向盘中间位置
+    double motor_middle_position = 11;
+
+    /// more
+}

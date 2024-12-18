@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package comm_data;
+
+enum MotorErrorCode {
+    MOTOR_NO_ERROR = 0;
+
+    /// 输入过压
+    MOTOR_OVER_VOLTAGE = 1;
+
+    /// 输入欠压
+    MOTOR_UNDER_VOLTAGE = 2;
+    
+    /// 固件错误
+    MOTOR_EEPROM_ERROR = 3;
+
+    /// 电流过大
+    MOTOR_OVER_CURRENT = 4;
+
+    /// 温度过高
+    MOTOR_OVER_TEMPERATURE = 5;
+
+    /// CAN通信超时
+    MOTOR_CAN_TIME_OUT = 6;
+
+    /// 输出电压过低
+    MOTOR_OUTPUT_VOLTAGE_LOW = 7;
+
+    /// 未归档错误
+    MOTOR_OTHER_ERROR = 100;
+
+    /// 未知错误
+    MOTOR_UNKNOW_ERROR = 255;
+}
+
+message MotorErrorInfo {
+    MotorErrorCode code = 1;
+
+    int32 code_raw = 2;
+
+    string message = 3;
+}

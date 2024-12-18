@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package comm_data;
+
+import "point3d.proto";
+import "header.proto";
+
+message WGS84 {
+    double longitude = 1;
+    double latitude = 2; 
+    double altitude = 3;
+
+    /// more
+    double yaw = 4;
+    double pitch = 5;
+    double roll = 6;
+}
+
+message ENU {
+    double x = 1;
+    double y = 2;
+    double z = 3;
+
+    double speed = 4;
+    double theta = 5;
+
+    /// more
+}
+
+message IMU {
+    /// 前/左/上线加速度
+    Point3D linear_acceleration = 1;
+
+    /// 前/左/上轴角速度
+    Point3D angular_velocity = 2;
+
+    /// more
+}
+
+/// 定位补充信息，如时间戳，持续时间，卫星数量，基站数量等
+message LocalizationSupplementInfo {
+    /// more
+    /// 卫星数量
+    int32 satellite_cnt = 1; 
+    /// 基站信号延迟
+    double base_station_signal_delay = 2;
+    /// 卫星差分状态 0不搜星，1单边，2伪距，4固定，5浮动
+    int32 satellite_diff_state = 3;  
+    /// 方向角是否故障 ， 0b无故障， 1b故障
+    int32 heading_failure = 4;
+    /// 定位模块是否故障， 0b无故障， 1b故障
+    int32 localization_failure = 5;
+    /// UTMtime
+    double utm_time = 6;
+}
+
+/// 定位模块输出的数据
+message Localization {
+    Header header = 1;
+
+    WGS84 wgs84 = 2;
+    ENU enu = 3;
+    IMU imu = 4;
+
+    LocalizationSupplementInfo supplement_info = 10;
+}
