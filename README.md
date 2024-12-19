@@ -1,0 +1,2 @@
+# Qt_data_analysis
+基于QT和python开发处理数据的demo
